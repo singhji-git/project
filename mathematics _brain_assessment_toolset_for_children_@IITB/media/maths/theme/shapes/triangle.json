@@ -1,1 +1,0 @@
-triangle = '[{"functions" : [{"functionName" : "drawPolygon","params":[{"key":"sides", "data":3}]}]}]'
