@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+
+<script type="text/javascript">
+function checkanswer(myid) {
+    var ans = parseInt("{{answer}}", 10);
+    var id = parseInt(myid, 10);
+    console.log(id+' '+ (ans+1));
+    if(ans+1 == id){
+    	console.log("eguj");
+    }
+}
+
+</script>
+
+{{question}}<br>
+{{answer}}<br>
+{% for i in options %}
+<button id='{{forloop.counter}}' onclick="checkanswer(this.id)" type="submit">{{i}} </button><br>
+{% endfor %}
+</body>
+</html>

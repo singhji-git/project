@@ -1,0 +1,1 @@
+theme = '[{"functions":[{"returnValue":"objectIndex","functionName":"randInt","params":[{"key":"startRange", "data":1},{"key":"endRange", "data":4}]},{"returnValue":"","functionName":"randomize","params":[{"key":"correctAnswer", "data":"correctAns"},{"key":"callFunction", "data":"objectIndex"}]}]},{"name":"candy_a"},{"name":"candy_b"},{"name":"candy_c"},{"name":"candy_d"}]'

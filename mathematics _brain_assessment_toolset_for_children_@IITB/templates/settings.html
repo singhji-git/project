@@ -1,0 +1,80 @@
+{% extends "base2.html"%}
+{% block title %}Settings|Learn and Grow{%endblock%}
+{% load staticfiles %}
+
+
+
+{% block head %}
+
+{% endblock %}
+
+
+{% block content %}
+
+<div class="row">
+<div class="col s10 offset-s2 m10 offset-m2 l10 offset-l2">
+<div class="extra-padding">
+           <div class="row">
+                   <div class="col s12 m12 l12">
+                   <h3>User Details</h3>
+                   </div>
+                   <form method="POST">{% csrf_token %}
+                     <div class="input-field col s12 m12 l12">
+                       <!-- <div class="row">
+                       	 <div class="col s2 offset-s1">
+                         	User Name 
+                         </div>	
+                         <div class="col s8">
+                           <input name="input_text" type="text" />
+                         </div>
+                      </div> -->
+                      <div class="row">
+                       	 <div class="col s2 offset-s1">
+                         	Name 
+                         </div>	
+                         <div class="col s4">
+                           <input name="input_first_name" type="text" value="{{form_first_name}}" />
+                           <!-- <label for="input_text1">Search Text</label> -->
+                         </div>
+
+                         <div class="col s4">
+                           <input name="input_last_name" type="text" value="{{form_last_name}}"/>
+                           <!-- <label> Last Name</label> -->
+                         </div>
+                      </div>
+                      <div class="row">
+                       	 <div class="col s2 offset-s1">
+                         	School Name 
+                         </div>	
+                         <div class="col s8">
+                           <input name="input_school_name" type="text" value="{{form_school_name}}"/>
+                         </div>
+                      </div>
+                      <div class="row">
+                       	 <div class="col s2 offset-s1">
+                         	Parent's Email
+                         </div>	
+                         <div class="col s8">
+                           <input name="input_parent_email" type="text" value="{{form_parent_email}}"/>
+                         </div>
+                      </div>
+                      <div class="row">
+                       	 <div class="col s2 offset-s1">
+                         	 Parent's Phone
+                         </div>	
+                         <div class="col s8">
+                           <input name="input_parent_phone" type="text" value="{{form_parent_phone}}"/>
+                         </div>
+                      </div>
+
+                      <button class="btn waves-effect waves-light col s2 offset-s1" type="submit" name="action">Save
+                             <i class="material-icons right">save</i>
+                            </button>
+                    </div>
+                  </form>
+           </div>   
+		</div>
+    </div>
+</div>
+
+{% endblock %}

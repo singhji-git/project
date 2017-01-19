@@ -1,0 +1,156 @@
+{% extends "base.html"%}
+{% block title %}Dashboard| Speel{%endblock%}
+{% load staticfiles %}
+
+
+{% block head %}
+
+<style type="text/css">
+	.themes{
+
+		margin:40px;
+		height: 150px;
+		background-color: skyblue;
+	}
+	.themes:hover{
+		border-radius: 50%;
+	}
+
+	.circle
+    {
+    width:150px;
+    height:150px;
+    border-radius:250px;
+    font-size:20px;
+    color:#fff;
+    line-height:150px;
+    text-align:center;
+    background: #03A9F4
+;
+    -webkit-transition: -webkit-transform .8s ease-in-out;
+  	transition: transform .8s ease-in-out;
+    }
+
+    .circle:hover{
+    	-webkit-transform: rotate(360deg);
+  		transform: rotate(360deg);
+    }
+
+    .mysize{
+    	margin-top: 10px;
+    	height: 170px;
+    }
+
+</style>
+
+{% endblock %}
+
+{% block content %}
+
+<script type="text/javascript">
+
+
+	function showgraph(subject, theme) { 
+ 	
+ 	var id = $(this).id;
+
+    var submitdata={
+    	themename: theme,
+    	subjectname:subject
+	};
+     $.ajax({
+         url: '/app/chart/',
+         type: 'post',
+         dataType: 'json',
+         success: function (data) {
+              console.log('succcees');
+         },
+         error: function(data){
+              console.log('error'+data);
+         },
+         data: submitdata
+     });
+  }
+</script>
+<nav>
+    <div class="nav-wrapper">
+      <a href="#" class="brand-logo"></a>
+      <ul id="nav-mobile" class="right hide-on-med-and-down">
+            	<li><a href=" {% url 'app.views.profile' %}">Play-Zone</a></li>
+            	<li><a href=" {% url 'app.views.newDashBoard' %}">DashBoard</a></li>
+            	<li><a href=" {% url 'app.views.leaderboard_redirect' %}">LeaderBoard</a></li>
+            	<li><a href=" {% url 'app.views.settings' %}">Settings</a></li>
+
+        <li><a href=" {% url 'app.views.loggedmeout' %}">Logout</a></li>
+      </ul>
+    </div>
+  </nav>
+<center><h3>USER DASH BOARD</h3></center>
+	
+<div class="row">
+	<ul class="tabs">
+      <li class="tab col s3"><a href="#maths" class="active">Maths</a></li>
+      <li class="tab col s3"><a href="#brain">Brain</a></li>
+    </ul>
+    <div id="maths" class="col s12">
+		<div class="col s10 offset-s2 m10 offset-m2 l10 offset-l2">
+
+			<ul class="collapsible popout" data-collapsible="accordion">
+				{% for rec in subjectthemelist.Maths %}   	
+			    <li>
+			      <div class="collapsible-header"><i class="material-icons">filter_drama</i>{{rec.name}}</div>
+			      <div class="collapsible-body">
+			      		 <div class="row">
+			      		 	<a href="/app/leaderboard/{{rec.name}}/">LeaderBoard</a>
+			      		 </div>
+			      		 <div class="row">
+			      		 {% for theme in rec.theme_list %}
+			      		  
+                    	<div class="col s3 l3 m3 mysize">
+                    	<!-- <button class="themename circle" id= '{{rec.name}}-{{theme}}'onclick="showgraph('{{rec.name}}' , '{{theme}}')"> {{theme}} </button> -->
+  						<div class="themename circle" > 
+  						<a href = "/app/chart/{{rec.name}}/{{theme}}" target="blank" style="color:white" >{{theme}} </a>
+  						</div>
+                    	</div>
+
+                    	{% endfor %}
+                    	</div>
+			      </div>
+			    </li>
+			   	{% endfor %}
+	  		</ul>
+		</div>
+	</div>
+	<div id="brain" class="col s12">
+		<div class="col s10 offset-s2 m10 offset-m2 l10 offset-l2">
+			<ul class="collapsible popout" data-collapsible="accordion">
+				{% for rec in subjectthemelist.Brain %}   	
+			     <li>
+			      <div class="collapsible-header"><i class="material-icons">filter_drama</i>{{rec.name}}</div>
+			      <div class="collapsible-body">
+			      		 <div class="row">
+			      		 	<a href="/app/leaderboard/{{rec.name}}/">LeaderBoard</a>
+			      		 </div>
+			      		 <div class="row">
+			      		 {% for theme in rec.theme_list %}
+			      		  
+                    	<div class="col s3 l3 m3 mysize">
+                    	<!-- <button class="themename circle" id= '{{rec.name}}-{{theme}}'onclick="showgraph('{{rec.name}}' , '{{theme}}')"> {{theme}} </button> -->
+  						<div class="themename circle" > 
+  						<a href = "/app/chart/{{rec.name}}/{{theme}}" target="blank" style="color:white" >{{theme}} </a>
+  						</div>
+                    	</div>
+
+                    	{% endfor %}
+                    	</div>
+			      </div>
+			    </li>
+			   	{% endfor %}
+	  		</ul>
+		</div>
+	</div>
+</div>
+{% endblock %}
+
+
+

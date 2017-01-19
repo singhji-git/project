@@ -1,0 +1,40 @@
+//JSON File Format for a Theme Creation
+//Define everything inside the theme variable
+//Theme = [functions,obj1,obj2,...] as an array of objects
+
+theme = '
+[{ 
+	//The Main theme functions are defined here
+	"functions": 
+	[{
+		"returnValue":"", //what the function returns, either a value or a variable name already defined in APILIB
+		"functionName":"", //name of the function that is to be called in the APILIB
+		"params": //The parameters of this function
+		[{
+			"key":"", //key is the name of the param (not used as such)
+			"data":"" //the actual value of the parameter
+		},
+		{
+			"key":"", //key is the name of the param (not used as such)
+			"data":"" //the actual value of the parameter
+		}//Define more params here
+		]
+	},
+	{
+		"returnValue":"",
+		"functionName":"",
+		"params":
+		[{
+			"key":"",
+			"data":""
+		}]
+	}//Define more functions here
+	]
+},
+//after functions, a theme may have various objects to be rendered, define them here
+//The name should be identical to that of the JSON variable of this object
+//see dummy_object.json to get an idea
+{
+	"name":"dummy_object"
+}//Define more objects here
+]'

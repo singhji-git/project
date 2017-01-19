@@ -1,0 +1,41 @@
+//JSON File Format for a Subjec Creation
+//Define everything inside the subject variable
+//Theme = [[functions,assessmentCount,],executeCount,rendererCount] as an array of objects
+
+subject = '
+[{
+	//The Main theme functions are defined here for a level
+	"functions": 
+	[{
+		"returnValue":"",//what the function returns, either a value or a variable name already defined in APILIB
+		"functionName":"", //name of the function that is to be called in the APILIB
+		"params": //The parameters of this function
+		[{
+			"key":"",//key is the name of the param (not used as such)
+			"data": //the actual value of the parameter
+		},
+		{
+			"key":"",
+			"data":
+		}//add more here
+		]
+	},
+	{
+		//this is a mandatory function, it is to be defined in every subject file
+		"returnValue":"operation",
+		"functionName":"operate",
+		"params":
+		[{
+			"key":"perform",
+			"data": //Add the number according to the case number in operate function of APILIB
+		}]
+	}],
+	"assessmentCount" : 3 //The number of correct answers, the user has to give, for crossing this level
+}, //add more levels here
+{
+	"executeCount":1 //number of times the functions need to be executed to obtain the values
+},
+{
+	"rendererCount":1 //number of renderers required by the game (generally it is equal to the execute count)
+	//if it is greater than the execute count , you can add different things in the other renderers
+}]'

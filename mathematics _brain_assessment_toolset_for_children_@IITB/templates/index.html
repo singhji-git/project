@@ -1,0 +1,264 @@
+﻿{% extends 'base2.html' %}
+{% block title %}Profile|Learn and Grow{%endblock%}
+{% load staticfiles %}
+
+
+{% block head %}
+<link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Eater+Caps" />
+<script src = "{% static 'js/three.js' %}"></script>		
+<script src="{% static 'js/Detector.js' %}"></script>
+<script src= "{% static 'js/THREEx.KeyboardState.js' %}"></script>
+<script src="{% static 'js/THREEx.FullScreen.js' %}"></script>
+<script src="{% static 'js/threex.dynamictexture.js' %}"></script>
+<script src="{% static 'js/THREEx.WindowResize.js' %}"></script>
+
+
+
+<script src="{% static 'js/Projector.js' %}"></script>
+<script src="{% static 'js/jquery-ui.js' %}"></script>
+<link rel=stylesheet href="{% static 'css/jquery-ui.css' %}"/>
+<link rel=stylesheet href="{% static 'css/info.css' %}"/>
+<script src = "{% static 'js/apilib.js' %}"></script>
+
+<style type="text/css">
+	body{ 
+background: url({% static 'images/playground.jpg'  %}) no-repeat center center fixed; 
+-webkit-background-size: cover;
+-moz-background-size: cover;
+-o-background-size: cover;
+background-size: cover;
+}
+#inputForm{
+	width: 0px;
+	height: 0px;
+	overflow: hidden;
+}
+.grow { transition: all .2s ease-in-out; }
+.grow:hover { transform: scale(2.0); }
+.rendererDiv{
+	background:white;
+	border:2px solid;
+}
+
+</style>
+<script type="text/javascript">
+	$(document).ready(function(){
+    // $("button").click(function(){
+    //     $("p").slideToggle();
+    // });
+    $("#playbutton").click(function(){
+   	$('#inputForm').css("height","auto");
+   	$('#inputForm').css("width","auto");
+   	$('#playbutton').hide();
+   });
+});
+
+</script>
+{% endblock %}
+
+
+{% block content %}
+    
+		<!--Execute Functions-->
+		<script>
+			var level;
+			var circleCount;
+			var jsonFiles;
+			var scene;
+			var camera;
+			var renderer, s, t;
+			var mouse = { x: 0, y: 0 };		
+			var projector = new THREE.Projector();		
+			var targetlist=[];
+			function init(count){
+				for(var i = 0; i < count; i++)
+				{
+					window["scene"+i] = new THREE.Scene();
+					window["camera"+i] = new THREE.PerspectiveCamera(75,window.innerWidth/window.innerHeight, 0.1, 1000);
+					window["renderer"+i] = new THREE.WebGLRenderer();
+					window["renderer"+i].setSize(window.innerWidth/(6*count)*3,window.innerHeight/4*3);
+					window["renderer"+i].setClearColor( 0xffffff );
+					window["camera"+i].position.z = 500;
+					var div = document.createElement("div");
+					div.id = "rendererDiv"+i;
+					div.className = "rendererDiv";
+					div.appendChild(window["renderer"+i].domElement);
+					document.getElementById("canvas").appendChild(div);
+				}
+			}
+
+              
+
+      function exec_game(){
+      jsonFiles={{ gamefiles|safe }};
+      console.log({{ MEDIA_URL }});
+      // jsonFiles=["../../app/media/subject/counting/counting.json","../../app/media/subject/counting/form_counting.json","../../app/media/theme/shapes/shapes.json",
+      //   "../../app/media/theme/shapes/circle.json","../../app/media/theme/shapes/square.json","../../app/media/theme/shapes/rectangle.json","../../app/media/theme/shapes/triangle.json"];
+      console.log(jsonFiles);
+      for(var i = 0; i < jsonFiles.length; i++){
+          apilib.loadJS(jsonFiles[i]);
+      }
+
+      }
+
+      exec_game();
+
+		</script>	
+	</head>
+	<body>
+		<!--Side Nav Function-->
+
+		 <form class="dummy-form" method="POST">
+		    {% csrf_token %}
+		</form>
+
+        <!--Upper Navigation Menu-->
+    	<div class = "row" id = "game">
+
+    		<!-- <button id="playbutton"onclick = "gameEngine()">&raquo; Play</button> -->
+
+    		 <a style="position:absolute; left:47%; top:11%;" id="playbutton"onclick = "gameEngine()" class="btn-floating btn-large waves-effect waves-light red grow">Play</a>
+
+			<!--Canvas-->
+			<div class = "row" id = "main">
+				<div class = "col l8" id = "canvas" >
+
+					<script>
+						var sceneL;
+						function gameEngine(){
+							var renderL = function(){
+								requestAnimationFrame(renderL);
+								rendererL.render(sceneL,cameraL);	
+							};
+							level = {{level}};
+							var score = {{score}};
+							var attempt = {{attempt}};
+							var subjectname="{{ subjectname }}";
+							var themename="{{ themename }}";
+							var lti = {{ lti_var }};
+							t = JSON.parse(theme);
+							s = JSON.parse(subject);
+							var count = s[s.length-1].rendererCount;
+							//Level Started Notification
+							sceneL = new THREE.Scene();
+							var cameraL = new THREE.PerspectiveCamera(75,window.innerWidth/window.innerHeight, 0.1, 1000);
+							var rendererL = new THREE.WebGLRenderer();
+							rendererL.setSize(window.innerWidth/6*3,window.innerHeight/4*3);
+							rendererL.setClearColor( 0xffffff );
+							cameraL.position.z = 500;
+							var listener = new THREE.AudioListener();
+							cameraL.add( listener );
+							var audioLoader = new THREE.AudioLoader();
+							var sound1 = new THREE.PositionalAudio( listener );
+							audioLoader.load( '../../media/audio/gameStarts.M4A', function( buffer ) {
+								sound1.setBuffer( buffer );
+								sound1.setRefDistance( 150 );
+								sound1.play();
+							});
+							var div = document.createElement("div");
+							div.id = "levelStarted";
+							
+							div.className = "rendererDiv";
+							div.appendChild(rendererL.domElement);
+
+							document.getElementById("canvas").appendChild(div);
+							
+							var string = "Level "+ String(level) +" Begins!!";
+							apilib.drawText([string,0,"sceneL",80]);
+							// apilib.draw123([string,0,"sceneL",80]);
+							renderL();
+							setTimeout(function(){
+								div.parentNode.removeChild(div);
+								init(count);
+								render();
+								var exitFlag = apilib.execute(level,s,t,attempt,subjectname,themename,lti);
+								//alert(exitFlag);
+								if(exitFlag)
+								{
+									console.log('exit');
+									//alert('eghkghhgfhgfg' + exitFlag);
+									var row = document.getElementById("main");
+									row.parentNode.removeChild(row);
+									reDirect();
+								}
+							},3000);
+							var render = function(){
+								requestAnimationFrame(render);
+								for(var i = 0;i<count;i++){
+									window["renderer"+i].render(window["scene"+i],window["camera"+i]);
+								}	
+							};
+							
+						}	
+				
+					</script>
+				</div>
+				<!--Input Form-->
+				<div class = "col l4" id = "inputForm">
+					<div class = "row">
+						<form class = "col l12" id = "gameEngineForm">
+							<ul class = "collection" id = "formUl" style="background:white; border:10px solid white">
+								<li class="collection-header center-align"><h4>Answer Here</h4></li>
+								<li class = "collection-item"></li>
+							</ul>
+							
+						</form>
+					</div>
+					<div class = "row">
+						<div class = "col l12" id = "levelCount">
+							<h4>Levels Crossed</h4>
+						</div>
+					</div>
+				</div>
+			</div>
+			<script>
+				function reDirect(){
+					var main = document.createElement("div");
+					main.id = "main";
+					main.class = "row";
+					main.style.paddingLeft = "240px";
+					main.style.textAlign = "center"
+
+					var div = document.createElement("div");
+					div.class = "col l12";
+					var heading = document.createElement("h2");
+					heading.innerHTML = "Hurray!! Game Completed!! Score : " + score;
+					div.appendChild(heading);
+					main.appendChild(div);
+
+					var div2 = document.createElement("div");
+					div2.class = "col l12";
+					var lti = {{ lti_var }};
+					if(lti == 0){
+						var main_button = document.createElement("div");
+						main_button.id = "main_button";
+						main_button.class = "row";
+						main_button.style.paddingLeft = "240px";
+						var heading = document.createElement("h3");
+						heading.innerHTML = "Go Back to The ";
+						var a = document.createElement("a");
+						a.href = "/app/profile";
+						a.innerHTML = "PlayZone";
+						heading.appendChild(a);
+						div2.appendChild(heading);
+						main_button.appendChild(div2);
+						main_button.style.paddingLeft = "270px";
+						main_button.style.textAlign = "center";
+						document.body.appendChild(main);
+						document.body.appendChild(main_button);
+					}
+					else{
+						document.body.appendChild(main);
+						setTimeout(function(){
+							close();
+							console.log("hello");
+						},2000);
+					}
+
+				}
+			</script>
+    	</div>
+		<!--Footer Code-->
+		
+
+{% endblock %}

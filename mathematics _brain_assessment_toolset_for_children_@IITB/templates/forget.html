@@ -1,0 +1,26 @@
+{% extends "base.html"%}
+{% block title %}Forget Password{%endblock%}
+{% load staticfiles %}
+
+
+
+{% block content %}
+
+
+<div class="row">
+	<div id="f1" class="col offset-s1 offset-l1 offset-m1 s8 m8 l8 ">
+	<form method = 'POST' action= ''>
+		{% csrf_token %} 
+			    			
+		{{form.as_p}}
+
+		<button class="btn-large waves-effect light-blue waves-light col s12" type="submit" name="register">Submit<i class="material-icons right">send</i>
+  		</button>
+
+	</form>
+	</div>
+</div>
+
+
+
+{% endblock %}

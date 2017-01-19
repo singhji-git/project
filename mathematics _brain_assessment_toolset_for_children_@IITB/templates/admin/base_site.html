@@ -1,0 +1,22 @@
+{% extends "admin/base.html" %}
+
+{% block title %} Speel Administration {% endblock %}
+
+
+{% block extrastyle %}
+<link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Aladin" />
+<style type="text/css">
+	#header{
+		font-family: Aladin;
+	}
+	
+</style>
+
+{% endblock %}
+
+
+{% block branding %}
+<h1 id="site-name"><a href="{% url 'admin:index' %}">Speel Admin Panel</a></h1>
+{% endblock %}
+
+{% block nav-global %}{% endblock %}

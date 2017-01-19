@@ -1,0 +1,1 @@
+form_a = '[{"questions":[{"key":"IS MIRROR IMAGE"}],"types":[{"key":"radio","count":2}],"dynamic":[{"key" : false}],"functions":[],"labels":[{"params":[{"key":"YES"},{"key":"NO"}]}]}]'

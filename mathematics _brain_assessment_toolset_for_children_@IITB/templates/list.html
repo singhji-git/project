@@ -1,0 +1,28 @@
+{% extends "base.html"%}
+{% block title %}themefiles{%endblock%}
+{% load staticfiles %}
+
+
+
+{% block content %}
+<h1>Theme List</h1>
+
+
+
+
+<table style="width:100%">
+  <tr>
+    <th>Name</th>
+    <th>Theme url</th>
+
+  </tr>
+  {% for theme in theme_list %}
+  <tr>
+    <td>{{ theme.themename }}</td>
+    <td>{{ theme.themefile.url }}</td>
+
+  </tr>
+{% endfor %}
+</table>
+
+{% endblock %}
