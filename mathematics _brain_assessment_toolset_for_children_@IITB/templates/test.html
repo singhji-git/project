@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Server client data connection</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+  </head>
+  <body>
+  <button onclick = "send()">&raquo; Run</button>
+    <p id="send"> </p>
+
+
+ <form class="dummy-form" method="POST">
+    {% csrf_token %}
+</form>
+  </body>
+
+  <script type="text/javascript">
+
+  function getCookie(name) {
+            var cookieValue = null;
+            if (document.cookie && document.cookie != '') {
+                  var cookies = document.cookie.split(';');
+            for (var i = 0; i < cookies.length; i++) {
+                 var cookie = jQuery.trim(cookies[i]);
+            // Does this cookie string begin with the name we want?
+            if (cookie.substring(0, name.length + 1) == (name + '=')) {
+              cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+               }
+            }
+        }
+   return cookieValue;
+  }
+
+
+   var csrftoken = getCookie('csrftoken');
+
+
+  function send() {
+     var   subject="addition";
+     var   theme="shapes";
+     var location = window.location.href;
+     window.location.href = location.substring(0,location.indexOf("app")) + 'app/games/' + subject +'/' + theme;
+    //  $('#send').html("sending");
+    // // alert('hewi');
+    //  $.ajax({
+    //      url: '/app/games/',
+    //      type: 'post',
+    //      dataType: 'json',
+    //      success: function (data) {
+    //           $('#send').html("sent");
+    //      },
+    //      error: function(data){
+    //         $('#send').html("not sent");
+    //      },
+    //      data: person
+    //  });
+  }
+  $(function() {
+    // Handler for .ready() called.
+
+    //send();
+  });
+  </script>
+</html>

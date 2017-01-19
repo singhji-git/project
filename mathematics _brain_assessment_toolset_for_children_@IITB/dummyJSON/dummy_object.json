@@ -1,0 +1,20 @@
+//JSON File Format for a Theme Creation
+//Define everything inside the dummy_object variable //You can change the name of this object
+//Make sure to include it in your theme.json file by this name
+//dummy_object = [functions] as object
+
+dummy_object = '
+[{
+	//The Main object functions are defined here
+	"functions" : 
+	[{
+		"functionName" : "", //name of the function that is to be called in the APILIB
+		"params": //The parameters of this functions
+		[{
+			"key":"", //key is the name of the param (not used as such)
+			"data":"" //the actual value of the parameter
+		} //Define more params here
+		]
+	}//Define more functions here
+	]
+}]'

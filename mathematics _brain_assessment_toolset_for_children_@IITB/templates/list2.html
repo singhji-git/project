@@ -1,0 +1,28 @@
+{% extends "base.html"%}
+{% block title %}Subject files{%endblock%}
+{% load staticfiles %}
+
+
+
+{% block content %}
+
+<h1>Subject List</h1>
+
+
+
+<table style="width:100%">
+  <tr>
+    <th>Name</th>
+    <th>Theme url</th>
+
+  </tr>
+  {% for subject in subject_list %}
+  <tr>
+    <td>{{ subject.subjectname }}</td>
+    <td>{{ subject.subjectfile.url }}</td>
+
+  </tr>
+{% endfor %}
+</table>
+
+{% endblock %}

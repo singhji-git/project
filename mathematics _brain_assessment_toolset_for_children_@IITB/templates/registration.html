@@ -1,0 +1,14 @@
+{% extends "base.html"%}
+{% block title %}Registration{%endblock%}
+{% load staticfiles %}
+
+
+
+{% block content %}
+
+{% if success %}
+	Registration is Successful. Click <a href="{% url 'app.views.base' %}">here</a> to login.
+{% else %}
+	Registration is Unsuccessful. {{reason}}. Click <a href="{% url 'app.views.base' %}">here</a> to register again.
+{% endif %}
+{% endblock %}

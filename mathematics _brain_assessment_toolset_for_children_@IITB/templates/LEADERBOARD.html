@@ -1,0 +1,84 @@
+{% extends 'base2.html' %}
+
+
+{% block head %}
+<style type="text/css">
+  table, th, td {
+    border: none;
+    border-collapse: collapse;
+}
+</style>
+{% endblock %}
+
+{%block content%}
+<!-- bread crumbs---->
+<br><br>
+<div class="row">
+
+<div class="col s10 offset-s2 m10 offset-m2 l10 offset-l2">
+<div class="extra-padding"><!-- 
+       <nav >
+          <div class="nav-wrapper">  
+            <div class="col s12">
+              <a href="#!" class="breadcrumb">First</a>
+              <a href="#!" class="breadcrumb">Second</a>
+              <a href="#!" class="breadcrumb">Third</a>
+            </div>
+          </div>
+        </nav> -->
+               <div class="row">
+                       <div class="col s4 m6 l6">
+                       <h3>LEADERBOARD</h3>
+                       </div>
+                       <form method="POST">{% csrf_token %}
+                         <div class="input-field col s8 m6 l6">
+                           <div class="row">
+                             <div class="col s6">
+                               <input id="input_text" type="text" length="10" name="search_text"></input>
+                               <label for="input_text">Search By Name/School</label>
+                             </div>
+                          <div class="col s2">
+                            <button class="btn waves-effect waves-light" type="submit" name="action">Submit
+                             <i class="material-icons right">search</i>
+
+                            </button>
+                           
+                          </div>
+                          </div>
+                        </div>
+                      </form>
+               </div>
+
+               
+
+                 <table class="highlight striped" >
+                    <thead>
+                                <tr>
+                                     <th data-field="Rank">Rank</th>
+                                    <th data-field="name">User Name</th>
+                                    <!-- <th data-field="price">Right</th>
+                                     <th data-field="price">Wrong</th> -->
+                                    <th data-field="school_name">School Name</th>
+                                </tr>
+                              </thead>
+
+                              <tbody>
+                           
+                                {% for user in users %}
+                                  <tr ng-repeat="filter:input_search_text">
+                                    <td>{{user.rank}}</td>
+                                    <td>{{user.username}}</td>
+                                    <!-- <td>{{user.score}}</td>
+                                    <td>{{user.penalty}}</td> -->
+                                    <td>{{user.school_name}}</td>
+                                  </tr>
+                                {% endfor %}
+                              </tbody>
+                            </table>
+        </div>
+        </div>
+</div>
+<!--breadcrumbs end here-->
+
+
+{% endblock %}

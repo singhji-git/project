@@ -1,0 +1,29 @@
+{% extends "base.html"%}
+{% block title %}themefiles{%endblock%}
+{% load staticfiles %}
+
+
+{%block head%}
+<link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Fontdiner+Swanky" />
+<style type="text/css">
+	body{
+		background-color: black;
+		color: #FF9800;
+		font-family: "Fontdiner Swanky";
+		text-align: center;
+		padding-top: 200px;
+		font-size: 30px;
+	}
+</style>
+{% endblock %}
+
+
+
+
+
+
+{% block content %}
+
+Hey Dude! You Are Going NoWhere ! Go to <a href="{% url 'app.views.base' %}">Home</a>
+
+{% endblock %}

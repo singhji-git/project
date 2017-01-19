@@ -1,0 +1,10 @@
+Django==1.9.7
+django-common-helpers==0.8.0
+django-cron==0.4.6
+mongoengine==0.10.6
+pyglet==1.2.4
+pymongo==3.2.2
+pytz==2016.4
+requests==2.10.0
+sparkpost==1.2.0
+xlrd==1.0.0

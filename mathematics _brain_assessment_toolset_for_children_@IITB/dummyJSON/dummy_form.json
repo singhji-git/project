@@ -1,0 +1,50 @@
+//JSON File Format for a Form Creation
+//Define everything inside the form_a variable
+//form_a = [[questions,types,dynamic,functions,labels]] as objects array
+form_a = '
+[{
+	"questions": //Define all your questions here as key-value pair
+	[{
+		"key":"", 
+		
+	}//add more here
+	],
+	"types": //what type of options are required
+	[{
+		"key":"radio", //"radio" = radioButton
+		//"label" = text view
+		//"noSubmi" = no button required
+		//"-1"  = nothing but plain submit button required
+		"count":4 //the number of entities required
+	}//add more here
+	],
+	"dynamic": //If functions are required or not
+	[{
+		"key" : //either true or false //if true, define functions below, else define the labels
+	}],
+	"functions": //Name of the functions to create dynamic options, for each question
+	[{
+		//for q1
+		"functionName":"", //Name of the function
+		"params": //the parameters it requires
+		[{
+			"key":"",//key is the name of the param (not used as such)
+			"data": //the actual value of the parameter
+		},
+		{
+			"key":"",
+			"data":
+		}//add more here
+		]
+	}//Define more according to number of questions
+	],
+	"labels": //Labels are required if you wish to manually add the options
+	[//Define for q1
+	{
+		"params":
+		[{
+			"key" : "" //Define the name here
+		}]
+	}//add more here
+	]
+}]'
